@@ -1,7 +1,7 @@
 {
   "type": "page",
   "title": "查看详情 ${params.id}",
-  "remark": null,
+  "remark": "",
   "toolbar": [
     {
       "type": "button",

@@ -2,3 +2,5 @@
 /package-lock.json
 /gh-pages
 .vscode/
+# copy from /Users/chenbing/projects/opensource/fe/amisschema.json
+schema.json

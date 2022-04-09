@@ -13,6 +13,7 @@ app.use(bodyParser.json()); // Parses json, multi-part (file), url-encoded
 
 app.use('/public', express.static('public'));
 app.use('/pages', express.static('pages'));
+app.use('/api', express.static('api'));
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
