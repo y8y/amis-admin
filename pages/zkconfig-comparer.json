@@ -1,0 +1,101 @@
+{
+  "title": "ZK 配置中心对比器",
+  "type": "page",
+  "body": {
+    "type": "crud",
+    "draggable": true,
+    "syncLocation": false,
+    "autoFillHeight": true,
+    "api": {
+      "method": "get",
+      "url": "/api/quality/zkconfig_comparer?sourGroupName=tf-master-standard&tarGroupNames=jdy-pro&type=2"
+    },
+    "keepItemSelectionOnPageChange": true,
+    "filter": {
+      "title": "分组选取",
+      "body": [
+        {
+          "label": "源分组：",
+          "type": "select",
+          "name": "select_src",
+          "value": "tf-master-standard",
+          "options": [
+            {
+              "label": "jdy-v7-dev",
+              "value": "jdy-v7-dev"
+            },
+            {
+              "label": "jdy-pro",
+              "value": "jdy-pro"
+            },
+            {
+              "label": "tf-feature1",
+              "value": "tf-feature1"
+            },
+            {
+              "label": "tf-master-standard",
+              "value": "tf-master-standard"
+            }
+          ]
+        },
+        {
+          "label": "目标分组：",
+          "type": "select",
+          "name": "select_dst",
+          "value": "jdy-pro",
+          "options": [
+            {
+              "label": "jdy-v7-dev",
+              "value": "jdy-v7-dev"
+            },
+            {
+              "label": "jdy-pro",
+              "value": "jdy-pro"
+            },
+            {
+              "label": "tf-feature1",
+              "value": "tf-feature1"
+            },
+            {
+              "label": "tf-master-standard",
+              "value": "tf-master-standard"
+            }
+          ]
+        },
+        {
+          "label": "比较类型：",
+          "type": "select",
+          "name": "compare_type",
+          "value": "2",
+          "options": [
+            {
+              "label": "值比较",
+              "value": "2"
+            },
+            {
+              "label": "路径比较",
+              "value": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "columns": [
+      {
+        "name": "key",
+        "label": "比较对象",
+        "width": 300
+      },
+      {
+        "name": "srcValue",
+        "label": "源分组",
+        "width": 600
+      },
+      {
+        "name": "dstValue",
+        "label": "目标分组",
+        "width": 600
+      }
+    ]
+  }
+}

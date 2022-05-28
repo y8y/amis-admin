@@ -14,7 +14,28 @@ app.use(bodyParser.json()); // Parses json, multi-part (file), url-encoded
 app.use('/public', express.static('public'));
 app.use('/pages', express.static('pages'));
 app.use('/api', express.static('api'));
+app.use('/sdk', express.static('sdk'));
 
+app.get('/current_user', (req, res) => {
+  res.send(`
+  {
+    "status": 0,
+    "msg": "ok",
+    "data": {
+      "name": "carvin"
+    }
+  }
+  `);
+});
+
+// proxy
+const { createProxyMiddleware } = require('http-proxy-middleware');
+app.use('/api/quality', createProxyMiddleware({
+  target: 'http://localhost:8080',
+  changeOrigin: true,
+}));
+
+// NOTE: 这个匹配规则一定要放在 proxy 的下面，否则会先命中此规则。
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
