@@ -1,5 +1,5 @@
 {
-  "title": "ZK 配置中心比较器",
+  "title": "元数据比较器",
   "type": "page",
   "body": {
     "type": "crud",
@@ -8,7 +8,7 @@
     "autoFillHeight": true,
     "api": {
       "method": "get",
-      "url": "/api/quality/zkconfig_comparer?sourGroupName=tf-master-standard&tarGroupNames=jdy-pro&type=2"
+      "url": "/api/quality/meta_comparer?type=TWO_GROUP_FORM&group_a=tf-master-standard&group_b=jdy-pro&number_like=pur_bill_order"
     },
     "keepItemSelectionOnPageChange": true,
     "filter": {
@@ -82,18 +82,18 @@
     },
     "columns": [
       {
-        "name": "key",
+        "name": "name",
         "label": "比较对象",
         "width": 300
       },
       {
-        "name": "srcValue",
-        "label": "源分组",
+        "name": "valueA",
+        "label": "fkey",
         "width": 600
       },
       {
-        "name": "dstValue",
-        "label": "目标分组",
+        "name": "valueB",
+        "label": "ftype",
         "width": 600
       }
     ]

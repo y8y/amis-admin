@@ -18,6 +18,11 @@
                 "label": "配置比较器",
                 "url": "/zkconfig-comparer",
                 "schemaApi": "get:/pages/zkconfig-comparer.json"
+              },
+              {
+                "label": "元数据比较器",
+                "url": "/meta-comparer",
+                "schemaApi": "get:/pages/meta-comparer.json"
               }
             ]
           },
