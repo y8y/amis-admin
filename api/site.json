@@ -5,8 +5,8 @@
     "pages": [
       {
         "label": "Home",
-        "url": "/",
-        "redirect": "/dashboard"
+        "url": "/quality",
+        "redirect": "/quality/zkconfig-comparer"
       },
       {
         "children": [
@@ -16,13 +16,13 @@
             "children": [
               {
                 "label": "配置比较器",
-                "url": "/zkconfig-comparer",
-                "schemaApi": "get:/pages/zkconfig-comparer.json"
+                "url": "/quality/zkconfig-comparer",
+                "schemaApi": "get:/quality/pages/zkconfig-comparer.json"
               },
               {
                 "label": "元数据比较器",
-                "url": "/meta-comparer",
-                "schemaApi": "get:/pages/meta-comparer.json"
+                "url": "/quality/meta-comparer",
+                "schemaApi": "get:/quality/pages/meta-comparer.json"
               }
             ]
           }
