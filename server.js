@@ -28,7 +28,7 @@ app.use('/quality/sdk', express.static('sdk'));
 //   `);
 // });
 
-// proxy
+// proxy: 仅在开发环境需要，k8s 中直接走的 ingress
 const { createProxyMiddleware } = require('http-proxy-middleware');
 app.use('/api/quality', createProxyMiddleware({
   target: 'http://localhost:8080',
