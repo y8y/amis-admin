@@ -8,7 +8,7 @@
     "autoFillHeight": true,
     "api": {
       "method": "get",
-      "url": "/api/quality/zkconfig_comparer?sourGroupName=tf-master-standard&tarGroupNames=jdy-pro&type=2"
+      "url": "/api/quality/zkconfig_comparer"
     },
     "keepItemSelectionOnPageChange": true,
     "filter": {
@@ -17,7 +17,7 @@
         {
           "label": "源分组：",
           "type": "select",
-          "name": "select_src",
+          "name": "group_a",
           "value": "tf-master-standard",
           "options": [
             {
@@ -41,7 +41,7 @@
         {
           "label": "目标分组：",
           "type": "select",
-          "name": "select_dst",
+          "name": "group_b",
           "value": "jdy-pro",
           "options": [
             {
@@ -61,40 +61,50 @@
               "value": "tf-master-standard"
             }
           ]
-        },
-        {
-          "label": "比较类型：",
-          "type": "select",
-          "name": "compare_type",
-          "value": "2",
-          "options": [
-            {
-              "label": "值比较",
-              "value": "2"
-            },
-            {
-              "label": "路径比较",
-              "value": "1"
-            }
-          ]
         }
       ]
     },
     "columns": [
       {
-        "name": "key",
+        "name": "path",
         "label": "比较对象",
-        "width": 300
+        "width": 300,
+        "className": "overflow-auto"
       },
       {
-        "name": "srcValue",
+        "name": "valueA",
         "label": "源分组",
-        "width": 600
+        "width": 600,
+        "className": "overflow-auto"
       },
       {
-        "name": "dstValue",
+        "name": "valueB",
         "label": "目标分组",
-        "width": 600
+        "width": 600,
+        "className": "overflow-auto"
+      },
+      {
+        "type": "operation",
+        "label": "对比",
+        "width": 40,
+        "buttons": [
+          {
+            "type": "button",
+            "label": "对比",
+            "level": "primary",
+            "actionType": "dialog",
+            "dialog": {
+              "type": "form",
+              "size": "full",
+              "title": "配置项比较",
+              "body": {
+                "type": "diff-editor",
+                "name": "valueA",
+                "diffValue": "${valueB}"
+              }
+            }
+          }
+        ]
       }
     ]
   }

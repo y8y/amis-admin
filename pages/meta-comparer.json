@@ -8,16 +8,32 @@
     "autoFillHeight": true,
     "api": {
       "method": "get",
-      "url": "/api/quality/meta_comparer?type=TWO_GROUP_FORM&group_a=tf-master-standard&group_b=jdy-pro&number_like=pur_bill_order"
+      "url": "/api/quality/meta_comparer"
     },
     "keepItemSelectionOnPageChange": true,
     "filter": {
-      "title": "分组选取",
+      "title": "元数据对比参数",
       "body": [
+        {
+          "label": "对比类型：",
+          "type": "select",
+          "name": "type",
+          "value": "TWO_GROUP_FORM",
+          "options": [
+            {
+              "label": "TWO_GROUP_FORM",
+              "value": "TWO_GROUP_FORM"
+            },
+            {
+              "label": "TWO_GROUP_ENTITY",
+              "value": "TWO_GROUP_ENTITY"
+            }
+          ]
+        },
         {
           "label": "源分组：",
           "type": "select",
-          "name": "select_src",
+          "name": "group_a",
           "value": "tf-master-standard",
           "options": [
             {
@@ -41,7 +57,7 @@
         {
           "label": "目标分组：",
           "type": "select",
-          "name": "select_dst",
+          "name": "group_b",
           "value": "jdy-pro",
           "options": [
             {
@@ -63,20 +79,11 @@
           ]
         },
         {
-          "label": "比较类型：",
-          "type": "select",
-          "name": "compare_type",
-          "value": "2",
-          "options": [
-            {
-              "label": "值比较",
-              "value": "2"
-            },
-            {
-              "label": "路径比较",
-              "value": "1"
-            }
-          ]
+          "type": "input-text",
+          "label": "fnumber：",
+          "name": "number_like",
+          "value": "pur_bill_order",
+          "placeholder": ">= 3个字符"
         }
       ]
     },
@@ -87,14 +94,37 @@
         "width": 300
       },
       {
-        "name": "valueA",
+        "name": "key",
         "label": "fkey",
         "width": 600
       },
       {
-        "name": "valueB",
+        "name": "type",
         "label": "ftype",
         "width": 600
+      },
+      {
+        "type": "operation",
+        "label": "对比",
+        "width": 40,
+        "buttons": [
+          {
+            "type": "button",
+            "label": "对比",
+            "level": "primary",
+            "actionType": "dialog",
+            "dialog": {
+              "type": "form",
+              "size": "full",
+              "title": "元数据比较",
+              "body": {
+                "type": "diff-editor",
+                "name": "valueA",
+                "diffValue": "${valueB}"
+              }
+            }
+          }
+        ]
       }
     ]
   }
