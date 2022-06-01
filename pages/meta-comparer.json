@@ -119,8 +119,8 @@
               "title": "元数据比较",
               "body": {
                 "type": "diff-editor",
-                "name": "valueA",
-                "diffValue": "${valueB}"
+                "name": "valueB",
+                "diffValue": "${valueA}"
               }
             }
           }
