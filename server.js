@@ -11,22 +11,22 @@ app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json()); // Parses json, multi-part (file), url-encoded
 
-app.use('/quality/public', express.static('public'));
-app.use('/quality/pages', express.static('pages'));
-app.use('/quality/api', express.static('api'));
-app.use('/quality/sdk', express.static('sdk'));
+app.use('/public', express.static('public'));
+app.use('/pages', express.static('pages'));
+app.use('/api', express.static('api'));
+app.use('/sdk', express.static('sdk'));
 
-// app.get('/current_user', (req, res) => {
-//   res.send(`
-//   {
-//     "status": 0,
-//     "msg": "ok",
-//     "data": {
-//       "name": "carvin"
-//     }
-//   }
-//   `);
-// });
+app.get('/current_user', (req, res) => {
+  res.send(`
+  {
+    "status": 0,
+    "msg": "ok",
+    "data": {
+      "name": "carvin"
+    }
+  }
+  `);
+});
 
 // proxy: 仅在开发环境需要，k8s 中直接走的 ingress
 const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -36,7 +36,7 @@ app.use('/api/quality', createProxyMiddleware({
 }));
 
 // NOTE: 这个匹配规则一定要放在 proxy 的下面，否则会先命中此规则。
-app.get('/quality/*', function (req, res) {
+app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 

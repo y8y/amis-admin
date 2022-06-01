@@ -99,8 +99,8 @@
               "title": "配置项比较",
               "body": {
                 "type": "diff-editor",
-                "name": "valueB",
-                "diffValue": "${valueA}"
+                "name": "valueA",
+                "diffValue": "${valueB}"
               }
             }
           }
