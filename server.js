@@ -22,7 +22,8 @@ app.get('/current_user', (req, res) => {
     "status": 0,
     "msg": "ok",
     "data": {
-      "name": "carvin"
+      "name": "carvin",
+      "email": "yk1001@163.com"
     }
   }
   `);

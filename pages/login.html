@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
 
 <head>
   <meta charset="UTF-8" />
-  <title>amis demo</title>
+  <title>amis admin</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   <link rel="stylesheet" title="default" href="https://unpkg.com/amis@beta/sdk/antd.css" />
-  <!-- <link rel="stylesheet" href="sdk/sdk.css" /> -->
-  <!-- 从 1.1.0 开始 sdk.css 将不支持 IE 11，如果要支持 IE11 请引用这个 css -->
-  <!-- <link rel="stylesheet" href="sdk-ie11.css" /> -->
-  <!-- 不过 amis 开发团队几乎没测试过 IE 11 下的效果，所以可能有不少功能用不了 -->
+  <link rel="stylesheet" href="https://unpkg.com/amis@beta/sdk/helper.css" />
+  <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>
+  <script src="https://unpkg.com/vue@2"></script>
+  <script src="https://unpkg.com/history@4.10.1/umd/history.js"></script>
   <style>
     html,
     body,
@@ -27,73 +27,104 @@
 
 <body>
   <div id="root" class="app-wrapper"></div>
-  <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>
-  <!-- <script src="sdk/sdk.js"></script> -->
-  <script src="/sdk/vars.js"></script>
-  <script type="text/javascript">
+  <script>
     (function () {
       let amis = amisRequire('amis/embed');
       // 通过替换下面这个配置来生成不同页面
       let amisScoped = amis.embed('#root',
+        // amis schema
         {
           "type": "page",
-          "title": "Index",
+          "title": "",
           "body": [
             {
-              "type": "tpl",
-              "tpl": "工作区",
-              "inline": false
-            }
-          ],
-          "toolbar": [
-            {
-              "type": "dropdown-button",
-              "label": "${email}",
-              "buttons": [
+              "type": "flex",
+              "alignItems": "center",
+              "justify": "center",
+              "style": {
+                "height": "90%"
+              },
+              "items": [
                 {
-                  "type": "button",
-                  "label": "我的",
-                  "actionType": "dialog",
-                  "dialog": {
-                    "title": "系统提示",
-                    "body": "对你点击了"
+                  "type": "wrapper",
+                  "body": [
+                    {
+                      "className": "b-3x b-warning",
+                      "type": "form",
+                      "body": [
+                        {
+                          "type": "wrapper",
+                          "className": "text-center",
+                          "body": {
+                            "type": "tpl",
+                            "tpl": "磐石",
+                            "className": "text-2xl",
+                          }
+                        },
+                        {
+                          "label": "账号",
+                          "type": "input-text",
+                          "name": "userno",
+                          "required": true,
+                          "description": "",
+                          "validations": {
+                            "isAlphanumeric": true,
+                            "matchRegexp": "^[\s\S].[^\\s][\s\S]*$"
+                          },
+                          "validationErrors": {
+                            "isAlphanumeric": "请正确填写账号",
+                            "matchRegexp": "请填写账号"
+                          }
+                        },
+                        {
+                          "label": "密码",
+                          "type": "input-password",
+                          "name": "password",
+                          "required": true,
+                          "validations": {
+                            "isAlphanumeric": true
+                          },
+                          "validationErrors": {
+                            "isAlphanumeric": "请正确填写密码"
+                          }
+                        },
+                        {
+                          "type": "button",
+                          "label": "登录",
+                          "actionType": "ajax",
+                          "level": "primary",
+                          "block": true,
+                          "link": "/index.html",
+                          "api": "post:/sys/auth/login"
+                        }
+                      ],
+                      "title": "表单",
+                      "submitText": "登录",
+                      "wrapWithPanel": false,
+                      "autoFocus": true,
+                      "api": "post:/sys/auth/login",
+                      "messages": {
+                        "fetchFailed": "",
+                        "saveSuccess": "",
+                        "saveFailed": "",
+                        "fetchSuccess": ""
+                      }
+                    }
+                  ],
+                  "style": {
+                    "width": "400px"
                   }
-                },
-                {
-                  "type": "button",
-                  "label": "管理",
-                  "actionType": "url",
-                  "dialog": {
-                    "title": "系统提示",
-                    "body": "对你点击了"
-                  },
-                  "api": "",
-                  "url": baseUrl + "/admin",
-                  "feedback": "",
-                  "visibleOn": "email == \"yk1001@163.com\""
-                },
-                {
-                  "type": "button",
-                  "label": "登出",
-                  "actionType": "ajax",
-                  "dialog": {
-                    "title": "系统提示",
-                    "body": "对你点击了"
-                  },
-                  "api": {
-                    "method": "post",
-                    "url": baseUrl + "/cookie/clear"
-                  },
-                  "redirect": baseUrl
                 }
-              ]
+              ],
+              "direction": "column"
             }
-          ],
-          "messages": {
-            "fetchSuccess": "登陆成功"
-          },
-          "initApi": "get:" + baseUrl + "/current_user",
-          "initFetch": true
+          ]
+        },
+        // 这里是初始 props
+        {},
+        // 注意是第四个参数
+        {
+          theme: 'antd'
         }
       );
     })();
