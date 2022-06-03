@@ -12,7 +12,6 @@ app.use(logger('dev'));
 app.use('/public', express.static('public'));
 app.use('/pages', express.static('pages'));
 app.use('/api', express.static('api'));
-app.use('/sdk', express.static('sdk'));
 
 // proxy: 仅在开发环境需要，k8s 中直接走的 ingress
 const { createProxyMiddleware } = require('http-proxy-middleware');

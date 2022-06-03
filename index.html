@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8" />
   <title>amis admin</title>
@@ -40,14 +41,17 @@
         brandName: '磐石平台',
         logo: '/public/logo.png',
         header: {
-          type: 'tpl',
-          inline: false,
-          className: 'w-full',
-          tpl: '<div class="flex justify-between"><div>顶部区域左侧</div><div>顶部区域右侧</div></div>'
+          type: 'wrapper',
+          className: 'ml-auto',
+          body: [
+            {
+              type: 'button',
+              label: '登出',
+              actionType: 'link',
+              link: window.location.origin + '/pages/login.html',
+            }
+          ]
         },
-        // footer: '<div class="p-2 text-center bg-light">底部区域</div>',
-        // asideBefore: '<div class="p-2 text-center">菜单前面区域</div>',
-        // asideAfter: '<div class="p-2 text-center">菜单后面区域</div>',
         api: '/api/site.json'
       };
 
@@ -185,4 +189,5 @@
     })();
   </script>
 </body>
+
 </html>
