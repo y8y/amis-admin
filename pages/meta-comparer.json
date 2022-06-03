@@ -8,7 +8,10 @@
     "autoFillHeight": true,
     "api": {
       "method": "get",
-      "url": "/api/quality/meta_comparer"
+      "url": "/api/quality/meta_comparer",
+      "headers": {
+        "Authorization": "${ls:accessToken}"
+      }
     },
     "keepItemSelectionOnPageChange": true,
     "filter": {

@@ -2,37 +2,28 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const reload = require('reload');
-const bodyParser = require('body-parser');
 const logger = require('morgan');
 
 const app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
-app.use(bodyParser.json()); // Parses json, multi-part (file), url-encoded
 
 app.use('/public', express.static('public'));
 app.use('/pages', express.static('pages'));
 app.use('/api', express.static('api'));
 app.use('/sdk', express.static('sdk'));
 
-app.get('/current_user', (req, res) => {
-  res.send(`
-  {
-    "status": 0,
-    "msg": "ok",
-    "data": {
-      "name": "carvin",
-      "email": "yk1001@163.com"
-    }
-  }
-  `);
-});
-
 // proxy: 仅在开发环境需要，k8s 中直接走的 ingress
 const { createProxyMiddleware } = require('http-proxy-middleware');
 app.use('/api/quality', createProxyMiddleware({
   target: 'http://localhost:8080',
+  changeOrigin: true,
+}));
+
+// 登录接口转发
+app.use('/api/auth/login/api', createProxyMiddleware({
+  target: 'http://panshi-master.jdy.com',
   changeOrigin: true,
 }));
 

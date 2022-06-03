@@ -34,89 +34,93 @@
       let amisScoped = amis.embed('#root',
         // amis schema
         {
-          "type": "page",
-          "title": "",
-          "body": [
+          type: "page",
+          title: "",
+          body: [
             {
-              "type": "flex",
-              "alignItems": "center",
-              "justify": "center",
-              "style": {
-                "height": "90%"
+              type: "flex",
+              alignItems: "center",
+              justify: "center",
+              style: {
+                height: "90%"
               },
-              "items": [
+              items: [
                 {
-                  "type": "wrapper",
-                  "body": [
+                  type: "wrapper",
+                  body: [
                     {
-                      "className": "b-3x b-warning",
-                      "type": "form",
-                      "body": [
+                      className: "b-3x b-warning",
+                      type: "form",
+                      body: [
                         {
-                          "type": "wrapper",
-                          "className": "text-center",
-                          "body": {
-                            "type": "tpl",
-                            "tpl": "磐石",
-                            "className": "text-2xl",
+                          type: "wrapper",
+                          className: "text-center",
+                          body: {
+                            type: "tpl",
+                            tpl: "磐石工具箱",
+                            className: "text-2xl",
                           }
                         },
                         {
-                          "label": "账号",
-                          "type": "input-text",
-                          "name": "userno",
-                          "required": true,
-                          "description": "",
-                          "validations": {
-                            "isAlphanumeric": true,
-                            "matchRegexp": "^[\s\S].[^\\s][\s\S]*$"
+                          label: "云之家账号",
+                          type: "input-text",
+                          name: "username",
+                          required: true,
+                          description: "",
+                          validations: {
+                            isAlphanumeric: true,
+                            matchRegexp: "^[\s\S].[^\\s][\s\S]*$"
                           },
-                          "validationErrors": {
-                            "isAlphanumeric": "请正确填写账号",
-                            "matchRegexp": "请填写账号"
+                          validationErrors: {
+                            isAlphanumeric: "请正确填写账号",
+                            matchRegexp: "请填写账号"
                           }
                         },
                         {
-                          "label": "密码",
-                          "type": "input-password",
-                          "name": "password",
-                          "required": true,
-                          "validations": {
-                            "isAlphanumeric": true
+                          label: "云之家密码",
+                          type: "input-password",
+                          name: "password",
+                          required: true,
+                          validations: {
+                            isAlphanumeric: true
                           },
-                          "validationErrors": {
-                            "isAlphanumeric": "请正确填写密码"
+                          validationErrors: {
+                            isAlphanumeric: "请正确填写密码"
                           }
                         },
                         {
-                          "type": "button",
-                          "label": "登录",
-                          "actionType": "ajax",
-                          "level": "primary",
-                          "block": true,
-                          "link": "/index.html",
-                          "api": "post:/sys/auth/login"
+                          type: "button",
+                          label: "登录",
+                          actionType: "ajax",
+                          level: "primary",
+                          block: true,
+                          link: "/index.html",
+                          api: {
+                            method: "POST",
+                            url: "/api/auth/login/api",
+                            data: {
+                              username: "${username}",
+                              password: "${password}",
+                            },
+                            adaptor: function (payload, response) {
+                              console.log(payload);
+                              localStorage.setItem('accessToken', "bearer " + payload.data.accessToken);
+                              return payload;
+                            }
+                          }
                         }
                       ],
-                      "title": "表单",
-                      "submitText": "登录",
-                      "wrapWithPanel": false,
-                      "autoFocus": true,
-                      "api": "post:/sys/auth/login",
-                      "messages": {
-                        "fetchFailed": "",
-                        "saveSuccess": "",
-                        "saveFailed": "",
-                        "fetchSuccess": ""
-                      }
+                      title: "表单",
+                      wrapWithPanel: false,
+                      autoFocus: true,
                     }
                   ],
-                  "style": {
-                    "width": "400px"
+                  style: {
+                    width: "400px"
                   }
                 }
               ],
-              "direction": "column"
+              direction: "column"
             }
           ]
         },

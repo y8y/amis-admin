@@ -8,7 +8,10 @@
     "autoFillHeight": true,
     "api": {
       "method": "get",
-      "url": "/api/quality/zkconfig_comparer"
+      "url": "/api/quality/zkconfig_comparer",
+      "headers": {
+        "Authorization": "${ls:accessToken}"
+      }
     },
     "keepItemSelectionOnPageChange": true,
     "filter": {
