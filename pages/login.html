@@ -51,6 +51,10 @@
                     {
                       className: "b-3x b-warning",
                       type: "form",
+                      title: "登录",
+                      wrapWithPanel: true,
+                      autoFocus: true,
+                      redirect: "/zkconfig-comparer",
                       body: [
                         {
                           type: "wrapper",
@@ -67,34 +71,21 @@
                           name: "username",
                           required: true,
                           description: "",
-                          validations: {
-                            isAlphanumeric: true,
-                            matchRegexp: "^[\s\S].[^\\s][\s\S]*$"
-                          },
-                          validationErrors: {
-                            isAlphanumeric: "请正确填写账号",
-                            matchRegexp: "请填写账号"
-                          }
                         },
                         {
                           label: "云之家密码",
                           type: "input-password",
                           name: "password",
                           required: true,
-                          validations: {
-                            isAlphanumeric: true
-                          },
-                          validationErrors: {
-                            isAlphanumeric: "请正确填写密码"
-                          }
-                        },
+                        }
+                      ],
+                      actions: [
                         {
                           type: "button",
                           label: "登录",
-                          actionType: "ajax",
+                          actionType: "submit",
                           level: "primary",
                           block: true,
-                          link: "/index.html",
                           api: {
                             method: "POST",
                             url: "/api/auth/login/api",
@@ -104,15 +95,25 @@
                             },
                             adaptor: function (payload, response) {
                               console.log(payload);
-                              localStorage.setItem('accessToken', "bearer " + payload.data.accessToken);
-                              return payload;
+                              if (response.status === 200 && payload.code === 0) {
+                                console.log("登录成功");
+                                localStorage.setItem('accessToken', "bearer " + payload.data.accessToken);
+                                return {
+                                  status: 0,
+                                  msg: "登录成功！",
+                                  data: null
+                                }
+                              } else {
+                                console.log("登录失败");
+                                return {
+                                  status: payload.code,
+                                  msg: payload.msg
+                                }
+                              }
                             }
                           }
                         }
                       ],
-                      title: "表单",
-                      wrapWithPanel: false,
-                      autoFocus: true,
                     }
                   ],
                   style: {

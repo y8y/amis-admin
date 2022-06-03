@@ -6,12 +6,12 @@
       {
         "label": "Home",
         "url": "/",
-        "redirect": "/dashboard"
+        "redirect": "/zkconfig-comparer"
       },
       {
         "children": [
           {
-            "label": "质量管理",
+            "label": "质量保障",
             "type": "nav",
             "children": [
               {
